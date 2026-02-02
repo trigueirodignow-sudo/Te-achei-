@@ -1,0 +1,7 @@
+{
+  "name": "TE ACHEI - Assistente Turístico",
+  "description": "Seu guia local inteligente para descobrir restaurantes, hotéis e atrações turísticas.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>TE ACHEI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      /* Custom Scrollbar */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      
+      /* --- CLASSIC PARCHMENT TEXTURE --- */
+      .bg-texture-parchment {
+        background: radial-gradient(circle at 50% 50%, #fdf6e3 0%, #e8dec0 100%);
+        background-color: #e8dec0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Light Paper Texture for Components */
+      .bg-texture-paper {
+        background-color: #fdfaf6;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+        box-shadow: 
+            0 10px 25px -5px rgba(0, 0, 0, 0.15), 
+            inset 0 0 15px rgba(160, 140, 100, 0.05);
+      }
+      
+      .text-3d {
+          text-shadow: 1px 1px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.1);
+      }
+
+      /* Banner Rasgado Style (Carimbo) */
+      .vintage-banner {
+        position: relative;
+        background: #911717;
+        color: #fff;
+        text-align: center;
+        padding: 4px 18px;
+        margin: 4px auto;
+        font-family: serif;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        clip-path: polygon(
+          2% 0%, 5% 4%, 9% 1%, 14% 5%, 19% 0%, 24% 3%, 30% 0%, 35% 4%, 40% 1%, 46% 5%, 52% 0%, 58% 4%, 63% 1%, 69% 5%, 75% 0%, 80% 3%, 86% 0%, 91% 4%, 96% 1%, 100% 5%,
+          98% 25%, 100% 50%, 98% 75%, 100% 95%,
+          96% 99%, 91% 96%, 86% 100%, 80% 97%, 75% 100%, 69% 95%, 63% 99%, 58% 96%, 52% 100%, 46% 95%, 40% 99%, 35% 96%, 30% 100%, 24% 97%, 19% 100%, 14% 95%, 9% 99%, 5% 96%, 0% 100%,
+          2% 75%, 0% 50%, 2% 25%, 0% 5%
+        );
+        box-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+        display: inline-block;
+        transform: rotate(-0.5deg);
+      }
+      
+      .vintage-banner-inner {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+        mix-blend-mode: overlay;
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      /* Leaflet specific fix for mobile screen breakage */
+      .leaflet-container {
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+      }
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+      }
+      .animate-shake { animation: shake 0.3s ease-in-out; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "react-leaflet": "https://esm.sh/react-leaflet@^5.0.0",
+    "leaflet/": "https://esm.sh/leaflet@^1.9.4/",
+    "leaflet": "https://esm.sh/leaflet@^1.9.4"
+  }
+}
+</script>
+</head>
+  <body class="bg-texture-parchment text-stone-900 antialiased overflow-hidden fixed w-full h-full touch-manipulation">
+    <div id="root" class="h-full w-full"></div>
+  </body>
+</html>
